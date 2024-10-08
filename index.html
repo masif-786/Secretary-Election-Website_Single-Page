@@ -72,6 +72,7 @@
             margin-bottom: 50px;
             text-align: center;
             color: var(--primary-color);
+            animation: colorChange 5s infinite alternate;
         }
 
         .features {
@@ -134,6 +135,7 @@
             text-decoration: none;
             border-radius: 50px;
             transition: all 0.3s ease-in-out;
+            animation: pulse 2s infinite;
         }
 
         .btn:hover {
@@ -307,33 +309,6 @@
             z-index: -1;
         }
 
-        .floating-tech-lines {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 0;
-        }
-
-        .tech-line {
-            position: absolute;
-            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
-            height: 1px;
-            width: 100%;
-            animation: techLineFloat 15s linear infinite;
-        }
-
-        @keyframes techLineFloat {
-            0% {
-                transform: translateY(-100%);
-            }
-            100% {
-                transform: translateY(100vh);
-            }
-        }
-
         .feature-icon {
             font-size: 4rem;
             margin-bottom: 20px;
@@ -349,6 +324,66 @@
             }
             100% {
                 transform: scale(1.1);
+            }
+        }
+
+        @keyframes colorChange {
+            0% {
+                color: var(--primary-color);
+            }
+            50% {
+                color: var(--secondary-color);
+            }
+            100% {
+                color: var(--primary-color);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+            }
+        }
+
+        .floating-bubbles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: rise 10s infinite ease-in;
+        }
+
+        @keyframes rise {
+            0% {
+                bottom: -100px;
+                transform: translateX(0);
+            }
+            50% {
+                transform: translate(100px, -500px);
+            }
+            100% {
+                bottom: 1080px;
+                transform: translateX(-200px);
             }
         }
 
@@ -396,7 +431,6 @@
     <div class="progress-bar"></div>
     <header>
         <div id="particles-js"></div>
-        <div class="floating-tech-lines"></div>
         <div class="header-content">
             <h1>Talha for TSA Secretary</h1>
             <p class="slogan">Empowering Our Association, One Record at a Time</p>
@@ -489,6 +523,7 @@
             <h2>Ready to Enhance TSA's Record-Keeping?</h2>
             <a href="#" class="btn">Vote Talha for Secretary!</a>
         </div>
+        <div class="floating-bubbles"></div>
     </section>
 
     <div id="bottom-particles"></div>
@@ -594,14 +629,15 @@
         }
         setTimeout(typeWriter, 1000);
 
-        // Add floating tech lines
-        const floatingTechLines = document.querySelector('.floating-tech-lines');
-        for (let i = 0; i < 10; i++) {
-            const line = document.createElement('div');
-            line.classList.add('tech-line');
-            line.style.left = `${Math.random() * 100}%`;
-            line.style.animationDelay = `${Math.random() * 5}s`;
-            floatingTechLines.appendChild(line);
+        // Add floating bubbles
+        const floatingBubbles = document.querySelector('.floating-bubbles');
+        for (let i = 0; i < 20; i++) {
+            const bubble = document.createElement('div');
+            bubble.classList.add('bubble');
+            bubble.style.left = `${Math.random() * 100}%`;
+            bubble.style.animationDuration = `${Math.random() * 5 + 5}s`;
+            bubble.style.animationDelay = `${Math.random() * 5}s`;
+            floatingBubbles.appendChild(bubble);
         }
     </script>
 </body>
